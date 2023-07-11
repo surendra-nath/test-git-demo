@@ -9,5 +9,5 @@
 } */
 
 #userDiv {
-    display: grid;    
+    display: flex;    
 }
