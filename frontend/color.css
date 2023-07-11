@@ -4,6 +4,10 @@
     margin-bottom: 10px;
   }
   
-#userDiv {
+/* #userDiv {
     display: flex;    
+} */
+
+#userDiv {
+    display: grid;    
 }
