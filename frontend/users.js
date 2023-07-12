@@ -1,37 +1,49 @@
 API_BASE_URL="http://localhost:3000";
 fetch(API_BASE_URL+'/api/users')
-  .then(response => { 
-    console.log("after api call : ", response);
-    return response.json(); })
-  .then(users => {
-    //console.log(users);
-    const userList = document.getElementById('userDiv');
+.then(response => { 
+       console.log("after api call : ", response);
+       return response.json(); })
+.then(users => {
+       //console.log(users);
+       const userList = document.getElementById('userDiv');
 
-   // users.forEach(user => {
-    //   const listItem = document.createElement('li');
-    //   listItem.textContent = `ID: ${user.id}, Username: ${user.username}, Address: ${user.address.street}`;
+    users.forEach(user => {
+      const userDiv = document.createElement('div');
+      userDiv.classList.add('user');
 
-    //   userList.appendChild(listItem);
-    // });
-  //});
+      const userLink = document.createElement('a');
+      userLink.href = '#';
+      userLink.textContent = `User ID: ${user.id}`;
 
-  users.forEach(user => {
-    const userDiv = document.createElement('div');
-    userDiv.classList.add('user');
+      userLink.addEventListener('click', () => {
+        displayUserProperties(user);
+      });
 
-    const idElement = document.createElement('p');
-    idElement.textContent = `ID: ${user.id}`;
+      userDiv.appendChild(userLink);
+      userList.appendChild(userDiv);
+    });
+  })
 
-    const usernameElement = document.createElement('p');
-    usernameElement.textContent = `Username: ${user.username}`;
+function displayUserProperties(user) {
+  const userList = document.getElementById('userDiv');
+  userList.innerHTML = '';
 
-    const addressElement = document.createElement('p');
-    addressElement.textContent = `Address: ${user.address.street}`;
+  const userDiv = document.createElement('div');
+  userDiv.classList.add('user');
 
-    userDiv.appendChild(idElement);
-    userDiv.appendChild(usernameElement);
-    userDiv.appendChild(addressElement);
+  const idElement = document.createElement('p');
+  idElement.textContent = `ID: ${user.id}`;
 
-    userList.appendChild(userDiv);
-  });
-});
+  const usernameElement = document.createElement('p');
+  usernameElement.textContent = `Username: ${user.username}`;
+
+  const addressElement = document.createElement('p');
+  addressElement.textContent = `Address: ${user.address}`;
+
+  userDiv.appendChild(idElement);
+  userDiv.appendChild(usernameElement);
+  userDiv.appendChild(addressElement);
+
+  userList.appendChild(userDiv);
+}
+
